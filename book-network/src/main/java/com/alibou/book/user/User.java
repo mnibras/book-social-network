@@ -1,5 +1,7 @@
 package com.alibou.book.user;
 
+import com.alibou.book.book.Book;
+import com.alibou.book.history.BookTransactionHistory;
 import com.alibou.book.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,6 +44,12 @@ public class User implements UserDetails, Principal {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> bookTransactionHistories;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
