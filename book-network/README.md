@@ -49,5 +49,6 @@ To set up the backend of the Book Social Network project, follow these steps:
 ```
 
 5. Access the API documentation using Swagger UI:
-
-Open a web browser and go to `http://localhost:8088/swagger-ui/index.html.
+```bash
+  http://localhost:8088/swagger-ui/index.html
+```
