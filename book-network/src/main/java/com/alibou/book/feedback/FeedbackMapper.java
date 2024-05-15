@@ -1,9 +1,11 @@
 package com.alibou.book.feedback;
 
 import com.alibou.book.book.Book;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+@Service
 public class FeedbackMapper {
 
     public Feedback toFeedback(FeedbackRequest feedbackRequest) {
