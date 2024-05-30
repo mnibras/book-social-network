@@ -1,18 +1,24 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {LoginComponent} from './pages/login/login.component';
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    CommonModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration(),
@@ -20,4 +26,5 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
