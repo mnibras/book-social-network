@@ -9,7 +9,7 @@ import {AuthenticationService} from "../../services/services/authentication.serv
 })
 export class ActivateAccountComponent {
   message: string = '';
-  isOkay: boolean = true;
+  isActivated: boolean = true;
   submitted: boolean = false;
 
   constructor(private router: Router,
@@ -30,12 +30,12 @@ export class ActivateAccountComponent {
         next: () => {
           this.message = 'Your account has been successfully activated.\nNow you can proceed to login';
           this.submitted = true;
-          this.isOkay = true;
+          this.isActivated = true;
         },
         error: () => {
           this.message = 'Token has been expired or invalid';
           this.submitted = true;
-          this.isOkay = false;
+          this.isActivated = false;
         }
       })
   }
