@@ -56,6 +56,33 @@ public class AuthenticationService {
         sendValidationEmail(user);
     }
 
+    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        Map<String, Object> claims = new HashMap<>();
+        User user = (User) authentication.getPrincipal();
+        claims.put("fullName", user.getFullName());
+        String jwtToken = jwtService.generateToken(claims, user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
+
+    public void activate(String token) throws MessagingException {
+        Token savedToken = tokenRepository.findByToken(token).orElseThrow(() -> new RuntimeException("Invalid Token"));
+        if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
+            sendValidationEmail(savedToken.getUser());
+            throw new RuntimeException("Activation code has expired. A new token as been sent to the same email address");
+        }
+        User user = userRepository.findById(savedToken.getUser().getId())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.setEnabled(true);
+        userRepository.save(user);
+        savedToken.setValidatedAt(LocalDateTime.now());
+        tokenRepository.save(savedToken);
+    }
+
     private void sendValidationEmail(User user) throws MessagingException {
         String newToken = generateAndSaveActivationToken(user);
         emailService.sendEmail(user.getEmail(), user.getFullName(), EmailTemplateName.ACTIVATE_ACCOUNT, activationUrl, newToken, "Account Activation");
@@ -82,32 +109,5 @@ public class AuthenticationService {
             codeBuilder.append(characters.charAt(randomIndex));
         }
         return codeBuilder.toString();
-    }
-
-    public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
-        Map<String, Object> claims = new HashMap<>();
-        User user = (User) authentication.getPrincipal();
-        claims.put("fullName", user.getFullName());
-        String jwtToken = jwtService.generateToken(claims, user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
-    }
-
-    public void activate(String token) throws MessagingException {
-        Token savedToken = tokenRepository.findByToken(token).orElseThrow(() -> new RuntimeException("Invalid Token"));
-        if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
-            sendValidationEmail(savedToken.getUser());
-            throw new RuntimeException("Activation code has expired. A new token as been sent to the same email address");
-        }
-        User user = userRepository.findById(savedToken.getUser().getId())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        user.setEnabled(true);
-        userRepository.save(user);
-        savedToken.setValidatedAt(LocalDateTime.now());
-        tokenRepository.save(savedToken);
     }
 }
