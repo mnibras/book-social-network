@@ -2,8 +2,8 @@ server:
     port: 8088
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5431/book_social_network
-        username: username
+        url: jdbc:postgresql://localhost:5431/book-social-network
+        username: nibras
         password: password
         driver-class-name: org.postgresql.Driver
     jpa:
