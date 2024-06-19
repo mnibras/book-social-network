@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ActivateAccountComponent } from './activate-account.component';
+import {ActivateAccountComponent} from './activate-account.component';
 
 describe('ActivateAccountComponent', () => {
-  let component: ActivateAccountComponent;
-  let fixture: ComponentFixture<ActivateAccountComponent>;
+    let component: ActivateAccountComponent;
+    let fixture: ComponentFixture<ActivateAccountComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ActivateAccountComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(ActivateAccountComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [ActivateAccountComponent]
+        })
+            .compileComponents();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture = TestBed.createComponent(ActivateAccountComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

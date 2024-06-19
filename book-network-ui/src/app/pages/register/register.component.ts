@@ -4,34 +4,34 @@ import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/services/authentication.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 
-  registerRequest: RegistrationRequest = {email: '', firstname: '', lastname: '', password: ''}
-  errorMsg: Array<string> = [];
+    registerRequest: RegistrationRequest = {email: '', firstname: '', lastname: '', password: ''}
+    errorMsg: Array<string> = [];
 
 
-  constructor(private router: Router,
-              private authService: AuthenticationService) {
-  }
+    constructor(private router: Router,
+                private authService: AuthenticationService) {
+    }
 
-  register() {
-    this.errorMsg = [];
-    this.authService.register({body: this.registerRequest})
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/activate-account']);
-        },
-        error: (err) => {
-          this.errorMsg = err.error.validationErrors;
-        }
-      });
-  }
+    register() {
+        this.errorMsg = [];
+        this.authService.register({body: this.registerRequest})
+            .subscribe({
+                next: () => {
+                    this.router.navigate(['/activate-account']);
+                },
+                error: (err) => {
+                    this.errorMsg = err.error.validationErrors;
+                }
+            });
+    }
 
-  login() {
-    this.router.navigate(['/login']);
-  }
+    login() {
+        this.router.navigate(['/login']);
+    }
 }
