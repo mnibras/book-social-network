@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BookService} from '../../../../services/services/book.service';
 import {PageResponseBookResponse} from '../../../../services/models/page-response-book-response';
 import {Router} from '@angular/router';
+import {BookResponse} from "../../../../services/models/book-response";
 
 @Component({
     selector: 'app-book-list',
@@ -68,5 +69,23 @@ export class BookListComponent implements OnInit {
                         .map((x, i) => i);
                 }
             });
+    }
+
+    borrowBook(book: BookResponse) {
+        this.message = '';
+        this.level = 'success';
+        this.bookService.borrowBook({
+            'book-id': book.id as number
+        }).subscribe({
+            next: () => {
+                this.level = 'success';
+                this.message = 'Book successfully added to your list';
+            },
+            error: (err) => {
+                console.log(err);
+                this.level = 'error';
+                this.message = err.error.error;
+            }
+        });
     }
 }
