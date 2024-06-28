@@ -2,31 +2,37 @@ package com.alibou.book.book;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record BookRequest(
-        Integer id,
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class BookRequest {
 
-        @NotNull(message = "100")
-        @NotEmpty(message = "100")
-        String title,
+        private Integer id;
 
-        @NotNull(message = "101")
-        @NotEmpty(message = "101")
-        String authorName,
+        @NotNull(message = "Title is required")
+        @NotEmpty(message = "Title is required")
+        private String title;
 
-        @NotNull(message = "102")
-        @NotEmpty(message = "102")
-        String isbn,
+        @NotNull(message = "Author name is required")
+        @NotEmpty(message = "Author name is required")
+        private String authorName;
 
-        @NotNull(message = "103")
-        @NotEmpty(message = "103")
-        String synopsis,
+        @NotNull(message = "ISBN is required")
+        @NotEmpty(message = "ISBN is required")
+        private String isbn;
 
-        @NotNull(message = "104")
-        @NotEmpty(message = "104")
-        String bookCover,
+        @NotNull(message = "Synopsis is required")
+        @NotEmpty(message = "Synopsis is required")
+        private String synopsis;
 
-        boolean archived,
-        boolean shareable
-        ) {
+        private boolean archived;
+        private boolean shareable;
+
 }
+

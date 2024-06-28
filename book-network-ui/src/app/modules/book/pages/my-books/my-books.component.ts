@@ -71,7 +71,7 @@ export class MyBooksComponent implements OnInit {
     }
 
     archiveBook(book: BookResponse) {
-        this.bookService.updateArchivedStatus({
+        this.bookService.updateArchiveStatus({
             'book-id': book.id as number
         }).subscribe({
             next: () => {
