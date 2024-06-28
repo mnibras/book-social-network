@@ -16,6 +16,7 @@ public class FeedbackController {
 
     private final FeedbackService feedbackService;
 
+    @PostMapping
     public ResponseEntity<Integer> saveFeedback(@Valid @RequestBody FeedbackRequest feedbackRequest,
                                                 Authentication connectedUser) {
         return ResponseEntity.ok(feedbackService.save(feedbackRequest, connectedUser));
