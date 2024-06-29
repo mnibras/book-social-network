@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.alibou</groupId>
-	<artifactId>book-network</artifactId>
+	<artifactId>book-network-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>book-network-api</name>
 	<description>Spring Boot project for book social network</description>
