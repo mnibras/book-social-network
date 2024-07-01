@@ -16,7 +16,7 @@ FROM openjdk:17-alpine
 
 # Default values if not passed during docker build
 ARG PROFILE=dev
-ARG APP_VERSION=1.0.0
+ARG APP_VERSION
 
 WORKDIR /app
 

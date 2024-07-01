@@ -22,11 +22,11 @@ services:
             - 1025:1025
     bsn-api:
         container_name: bsn-api
-        image: bsn/bsn:1.0.0
+        image: bsn/bsn-api:1.0.1
         environment:
             DB_URL: jdbc:postgresql://postgres-sql-bsn:5432/book-social-network
             ACTIVE_PROFILE: dev
-            JAR_VERSION: 1.0.0
+            JAR_VERSION: 1.0.1
         ports:
             - 8088:8088
         networks:
