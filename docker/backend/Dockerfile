@@ -25,6 +25,9 @@ COPY --from=build /build/target/book-network-api-*.jar /app/
 ENV DB_URL=jdbc:postgresql://postgres-sql-bsn:5432/book-social-network
 ENV ACTIVE_PROFILE=${PROFILE}
 ENV JAR_VERSION=${APP_VERSION}
+ENV EMAIL_HOST_NAME: missing_host_name
+ENV EMAIL_USER_NAME: missing_user_name
+ENV EMAIL_PASSWORD: missing_password
 
 EXPOSE 8088
 

@@ -21,6 +21,9 @@ services:
             DB_URL: jdbc:postgresql://postgres-sql-bsn:5432/book-social-network
             ACTIVE_PROFILE: dev
             JAR_VERSION: 1.0.2
+            EMAIL_HOST_NAME: ${EMAIL_HOST_NAME}
+            EMAIL_USER_NAME: ${EMAIL_USER_NAME}
+            EMAIL_PASSWORD: ${EMAIL_PASSWORD}
         ports:
             - 8088:8088
         networks:
